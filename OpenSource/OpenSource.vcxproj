@@ -159,7 +159,7 @@
     <ResourceCompile Include="OpenSource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Blank.ico" />
+    <Image Include="BlizzardIcon.ico" />
     <Image Include="War3.ico" />
     <Image Include="War3x.ico" />
   </ItemGroup>

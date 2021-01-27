@@ -39,7 +39,7 @@
     <Image Include="War3.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="Blank.ico">
+    <Image Include="BlizzardIcon.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>
