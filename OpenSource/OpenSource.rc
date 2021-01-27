@@ -52,8 +52,9 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
+'1'                     ICON                    "Blank.ico"
 
-WAR3.ICO               ICON                    "War3.ico"
+WAR3.ICO                ICON                    "War3.ico"
 
 WAR3X.ICO               ICON                    "War3x.ico"
 
@@ -74,8 +75,15 @@ BLIZZARDCURSOR.CUR      CURSOR                  "BlizzardCursor.cur"
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION 2,0,0,0
  PRODUCTVERSION 2,0,0,0
- FILEOS 0x4
- FILETYPE 0x1
+ FILEFLAGSMASK 0x0L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN

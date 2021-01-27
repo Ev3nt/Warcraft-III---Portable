@@ -36,10 +36,19 @@ BOOL CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hInstPrev, LPSTR lpCmdLine,
 	if (!procGameMain)
 		return FALSE;
 
-	SFileOpenArchive("", NULL, NULL, NULL);
+	std::ifstream file("War3.json");
+	if (!file)
+	{
+		std::ofstream file("War3.json");
+		file.close();
+	}
+	file.close();
 
+	SFileOpenArchive("", NULL, NULL, NULL);
+	
 	call(dwGame + 0x5951, BLZSRegQueryValueString_Proxy);
 	call(dwGame + 0x597F, BLZSRegQueryValueDword_Proxy);
+	call(dwGame + 0x10F6, BLZSRegQueryValueDword_Proxy);
 	call(dwGame + 0x5B8D, BLZSRegSetValueDword_Proxy);
 	call(dwGame + 0x5B56, BLZSRegSetValueString_Proxy);
 
@@ -64,14 +73,33 @@ LSTATUS CALLBACK BLZSRegQueryValueDword_Proxy(LPCSTR lpPath, LPCSTR lpValueName,
 		doc.SetObject();
 
 	const char* key = &lpPath[13];
+	const char* war3 = "Warcraft III";
+
+	if (!_strcmpi(lpPath, war3))
+		key = war3;
 
 	if (doc[key].HasMember(lpValueName))
+	{
 		if (doc[key][lpValueName].IsInt())
 		{
 			*(int*)lpData = doc[key][lpValueName].GetInt();
 
 			return 1;
 		}
+	}
+	else if (key == war3)
+	{
+		std::ofstream file("War3.json");
+
+		rapidjson::OStreamWrapper osw(file);
+		rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
+
+		doc.AddMember(rapidjson::Value(key, strlen(key), doc.GetAllocator()), rapidjson::Value().SetObject(), doc.GetAllocator());
+		doc[key].AddMember(rapidjson::Value(lpValueName, strlen(lpValueName), doc.GetAllocator()), rapidjson::Value(0), doc.GetAllocator());
+
+		doc.Accept(writer);
+		file.close();
+	}
 
 	return 0;
 }

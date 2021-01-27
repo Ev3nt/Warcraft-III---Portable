@@ -159,10 +159,12 @@
     <ResourceCompile Include="OpenSource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Blank.ico" />
     <Image Include="War3.ico" />
     <Image Include="War3x.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" />
     <None Include="BlizzardCursor.cur" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
