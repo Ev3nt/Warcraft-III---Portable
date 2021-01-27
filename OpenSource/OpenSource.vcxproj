@@ -72,16 +72,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platfrom)\</OutDir>
-    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(Platfrom)\Temp\</IntDir>
+    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)\Temp\</IntDir>
     <TargetName>$(SolutionName)</TargetName>
     <IncludePath>..\ThirdParty\RapidJSON\Include;..\ThirdParty\StormLib\Include;$(IncludePath)</IncludePath>
     <LibraryPath>..\ThirdParty\StormLib\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platfrom)\</OutDir>
-    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(Platfrom)\Temp\</IntDir>
+    <OutDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\Build\$(Configuration)\$(Platform)\Temp\</IntDir>
     <TargetName>$(SolutionName)</TargetName>
     <IncludePath>..\ThirdParty\RapidJSON\Include;..\ThirdParty\StormLib\Include;$(IncludePath)</IncludePath>
     <LibraryPath>..\ThirdParty\StormLib\Lib;$(LibraryPath)</LibraryPath>

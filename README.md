@@ -1,5 +1,5 @@
 # Warcraft III - Portable
-[![](https://github.com/Ev3nt/MM-Engine/blob/master/ThirdParty/master.svg)](https://github.com/Ev3nt/MM-Engine/blob/master/Build/Release/Win32)
+[![](https://github.com/Ev3nt/MM-Engine/blob/master/ThirdParty/master.svg)](https://github.com/Ev3nt/Warcraft-III---Portable/tree/master/Build/Release/Win32)
 
 
 Warcraft III - Portable is a semblance of the original war3.exe with changed functionality, namely, it is now not tied to either directory or register. All data is stored in the War3.json file and is synchronized with the game.
