@@ -18,6 +18,8 @@ HMODULE hStorm = LoadLibrary("Storm.dll");
 
 rapidjson::Document doc;
 
+const char* json = "War3.json";
+
 LSTATUS CALLBACK BLZSRegQueryValueDword_Proxy(LPCSTR lpPath, LPCSTR lpValueName, LPDWORD lpcbData, LPBYTE lpData);
 
 LSTATUS CALLBACK BLZSRegQueryValueString_Proxy(LPCSTR lpPath, LPCSTR lpValueName, LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
@@ -31,15 +33,23 @@ LSTATUS CALLBACK BLZSRegSetValueString_Proxy(LPCSTR lpPath, LPCSTR lpValueName, 
 BOOL CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hInstPrev, LPSTR lpCmdLine, int nCmdShow)
 {
 	if (!dwGame)
+	{
+		MessageBox(NULL, "Couldn't open Game.dll.", "Error", MB_ICONHAND);
+
 		return FALSE;
+	}
 
 	if (!procGameMain)
-		return FALSE;
+	{
+		MessageBox(NULL, "Game.dll is corrupt.", "Error", MB_ICONHAND);
 
-	std::ifstream file("War3.json");
+		return FALSE;
+	}
+
+	std::ifstream file(json);
 	if (!file)
 	{
-		std::ofstream file("War3.json");
+		std::ofstream file(json);
 		file.close();
 	}
 	file.close();
@@ -62,7 +72,7 @@ BOOL CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hInstPrev, LPSTR lpCmdLine,
 
 LSTATUS CALLBACK BLZSRegQueryValueDword_Proxy(LPCSTR lpPath, LPCSTR lpValueName, LPDWORD lpcbData, LPBYTE lpData)
 {
-	std::ifstream file("War3.json");
+	std::ifstream file(json);
 
 	rapidjson::IStreamWrapper isw(file);
 	doc.ParseStream(isw);
@@ -89,7 +99,7 @@ LSTATUS CALLBACK BLZSRegQueryValueDword_Proxy(LPCSTR lpPath, LPCSTR lpValueName,
 	}
 	else if (key == war3)
 	{
-		std::ofstream file("War3.json");
+		std::ofstream file(json);
 
 		rapidjson::OStreamWrapper osw(file);
 		rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
@@ -108,7 +118,7 @@ LSTATUS CALLBACK BLZSRegQueryValueString_Proxy(LPCSTR lpPath, LPCSTR lpValueName
 {
 	rapidjson::Document doc;
 
-	std::ifstream file("War3.json");
+	std::ifstream file(json);
 
 	rapidjson::IStreamWrapper isw(file);
 	doc.ParseStream(isw);
@@ -141,7 +151,7 @@ LSTATUS CALLBACK BLZSRegSetValueDword_Proxy(LPCSTR lpPath, LPCSTR lpValueName, D
 	if (!doc[key].HasMember(lpValueName))
 		doc[key].AddMember(rapidjson::Value(lpValueName, strlen(lpValueName), doc.GetAllocator()), rapidjson::Value(0), doc.GetAllocator());
 	
-	std::ofstream file("War3.json");
+	std::ofstream file(json);
 
 	rapidjson::OStreamWrapper osw(file);
 	rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
@@ -164,7 +174,7 @@ LSTATUS CALLBACK BLZSRegSetValueString_Proxy(LPCSTR lpPath, LPCSTR lpValueName, 
 	if (!doc[key].HasMember(lpValueName))
 		doc[key].AddMember(rapidjson::Value(lpValueName, strlen(lpValueName), doc.GetAllocator()), rapidjson::Value(lpData, strlen(lpData), doc.GetAllocator()), doc.GetAllocator());
 
-	std::ofstream file("War3.json");
+	std::ofstream file(json);
 
 	rapidjson::OStreamWrapper osw(file);
 	rapidjson::PrettyWriter<rapidjson::OStreamWrapper> writer(osw);
